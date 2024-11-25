@@ -36,13 +36,18 @@ function App() {
         );
       }
       if (type === "minus" && isFoundItem.quantity > 0) {
-        setItems(
-          items.map((item) =>
+        if(isFoundItem.quantity === 1){
+          setItems(items.filter((item) => item.name.toLowerCase() !== itemName));
+          setInputValue("");
+        }else{
+          setItems(
+            items.map((item) =>
             item.name.toLowerCase() === itemName
-              ? { ...item, quantity: item.quantity - 1 }
-              : item
-          )
-        );
+                ? { ...item, quantity: item.quantity - 1 }
+                : item
+            )
+          );
+        }
       }
     } else {
       if (type === "plus") {
