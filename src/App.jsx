@@ -52,6 +52,10 @@ function App() {
     document.querySelector('.input-wrapper input').focus();
   };
 
+  const handleClickRow = (id) => {
+    setInputValue(items.find((item) => item.id === id).name);
+  }
+
   return (
     <div className="App">
       <div className="top">
@@ -69,17 +73,17 @@ function App() {
           />
         </div>
         <div className="button-section">
-          <button onClick={() => changeQuantity(inputValue, "plus")}>
+          <button className="btn" onClick={() => changeQuantity(inputValue, "plus")}>
             PLUS
           </button>
-          <button onClick={() => changeQuantity(inputValue, "minus")}>
+          <button className={`btn ${isFoundItem?'':'disabled'}`} onClick={() => changeQuantity(inputValue, "minus")}>
             MINUS
           </button>
         </div>
       </div>
       <div className="content">
         {items.map((item, index) => (
-          <div className="row" key={index}>
+          <div className="row" onClick={()=>handleClickRow(item.id)} key={index}>
             <p>{item.name}: </p>
             <p>{item.quantity}</p>
           </div>
