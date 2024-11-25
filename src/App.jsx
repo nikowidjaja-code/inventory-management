@@ -74,6 +74,11 @@ function App() {
         <div className="input-wrapper">
           <input
             onChange={(e) => setInputValue(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                changeQuantity(inputValue, "plus");
+              }
+            }}
             maxLength={20}
             type="text"
             value={inputValue}
