@@ -53,6 +53,7 @@ function App() {
       if (type === "plus") {
         setItems([...items, { name: name, quantity: 1, id: incrementingIndex }]);
         setIncrementingIndex(incrementingIndex + 1);
+        setInputValue("");
       }
     }
   };
