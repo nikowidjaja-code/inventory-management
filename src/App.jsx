@@ -58,7 +58,8 @@ function App() {
   };
 
   const handleClickRow = (id) => {
-    setInputValue(items.find((item) => item.id === id).name);
+    const foundItem = items.find((item) => item.id === id);
+    setInputValue(foundItem.name);
   }
 
   return (
