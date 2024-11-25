@@ -96,7 +96,7 @@ function App() {
       </div>
       <div className="content">
         {items.filter((item)=> item.name.toLowerCase().includes(inputValue.toLowerCase())).map((item, index) => (
-          <div className="row" onClick={()=>handleClickRow(item.id)} key={index}>
+          <div className={`row ${item.name.toLowerCase()===itemName?'active':''}`} onClick={()=>handleClickRow(item.id)} key={index}>
             <p>{item.name}</p>
             <p>{item.quantity}</p>
           </div>

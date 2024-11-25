@@ -7,6 +7,9 @@
 
   font-family: "NotoSans";
 
+  background-color: #FFF8F0;
+  color: #1E1E24;
+
   .top {
     display: flex;
     flex-direction: column;
@@ -59,14 +62,17 @@
 
         font-weight: 700;
 
+        background-color: #971b12;
+        color: #FFF8F0;
+
         &.btn-plus {
-          background-color: #397fef;
-          color: white;
+          background-color: #007B83;
+          color: #FFF8F0;
         }
 
         &.btn-minus {
-          background-color: rgb(141, 2, 2);
-          color: white;
+          background-color: #92140C;
+          color: #FFF8F0;
         }
 
         &.disabled {
@@ -86,7 +92,6 @@
     height: 75%;
     overflow-y: auto;
     scrollbar-gutter: stable;
-    gap: 0.5rem;
 
     .row {
       display: flex;
@@ -97,7 +102,7 @@
       padding-left: 5%;
       padding-right: 10%;
 
-      border-bottom: 1px solid #958c7e;
+      border-bottom: 1px solid #1E1E24;
 
       &:last-child {
         border-bottom: none;
@@ -109,33 +114,61 @@
         }
         &:last-child {
           width: 10%;
-          text-align: right;
+          text-align: center;
+        }
+      }
+
+      &.active {
+         p:last-child{
+          background-color: #697565;
+          color: #ECDFCC;
         }
       }
     }
   }
 
   @media screen and (orientation: landscape) {
-    padding: 8% 10% 5% 10%;
+    padding: 8% 22% 5% 22%;
 
-    .top {
-      flex-direction: row;
-
-      .input-wrapper {
-        width: 65%;
-      }
-
-      .button-section {
-        width: 35%;
-
-        .btn {
-          width: 45%;
-        }
-      }
-    }
     .content {
       .row {
         min-height: 2.5rem;
+      }
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    padding: 2% 30% 2% 30%;
+
+    .top {
+      .input-wrapper {
+        input {
+          font-size: 1.1rem;
+        }
+        .reset-icon {
+          width: 2rem;
+          height: fit-content;
+        }
+      }
+
+      .button-section {
+        .btn {
+          font-size: 1rem;
+          padding: 0.5rem 1.5rem;
+        }
+      }
+    }
+
+    .content {
+      .row {
+        min-height: 3rem;
+        font-size: 1.1rem;
+
+        &:hover {
+          background-color: #92140C;
+          color: #FFF8F0;
+          cursor: pointer;
+        }
       }
     }
   }
