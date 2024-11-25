@@ -67,6 +67,7 @@ function App() {
         <div className="input-wrapper">
           <input
             onChange={(e) => setInputValue(e.target.value)}
+            maxLength={20}
             type="text"
             value={inputValue}
           />
