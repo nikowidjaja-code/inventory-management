@@ -1,35 +1,92 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import "./App.scss";
+import resetIcon from "./assets/close.png";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [inputValue, setInputValue] = useState("");
+  const [incrementingIndex, setIncrementingIndex] = useState(0);
+  const [items, setItems] = useState([
+    { name: "Nugget", quantity: 10, id: 100 },
+  ]);
+
+  const itemName = inputValue.toLowerCase();
+  const isFoundItem = items.find(
+    (item) => item.name.toLowerCase() === itemName
+  );
+
+  const changeQuantity = (name, type) => {
+    if (name.length === 0) {
+      alert("Please enter an item");
+      return;
+    }
+
+    if (isFoundItem) {
+      if (type === "plus") {
+        setItems(
+          items.map((item) =>
+            item.name.toLowerCase() === itemName
+              ? { ...item, quantity: item.quantity + 1 }
+              : item
+          )
+        );
+      }
+      if (type === "minus" && isFoundItem.quantity > 0) {
+        setItems(
+          items.map((item) =>
+            item.name.toLowerCase() === itemName
+              ? { ...item, quantity: item.quantity - 1 }
+              : item
+          )
+        );
+      }
+    } else {
+      if (type === "plus") {
+        setItems([...items, { name: name, quantity: 1, id: incrementingIndex }]);
+        setIncrementingIndex(incrementingIndex + 1);
+      }
+    }
+  };
+
+  const handleResetInput = () => {
+    setInputValue("");
+    document.querySelector('.input-wrapper input').focus();
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="App">
+      <div className="top">
+        <div className="input-wrapper">
+          <input
+            onChange={(e) => setInputValue(e.target.value)}
+            type="text"
+            value={inputValue}
+          />
+          <img
+            onClick={() => handleResetInput()}
+            src={resetIcon}
+            className="reset-icon"
+            alt="reset"
+          />
+        </div>
+        <div className="button-section">
+          <button onClick={() => changeQuantity(inputValue, "plus")}>
+            PLUS
+          </button>
+          <button onClick={() => changeQuantity(inputValue, "minus")}>
+            MINUS
+          </button>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <div className="content">
+        {items.map((item, index) => (
+          <div className="row" key={index}>
+            <p>{item.name}: </p>
+            <p>{item.quantity}</p>
+          </div>
+        ))}
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
