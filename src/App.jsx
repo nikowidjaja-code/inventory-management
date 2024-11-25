@@ -1,13 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.scss";
 import resetIcon from "./assets/close.png";
 
 function App() {
   const [inputValue, setInputValue] = useState("");
   const [incrementingIndex, setIncrementingIndex] = useState(0);
-  const [items, setItems] = useState([
-    { name: "Nugget", quantity: 10, id: 100 },
-  ]);
+  const [items, setItems] = useState(() => {
+    const savedItems = localStorage.getItem("items");
+    return savedItems ? JSON.parse(savedItems) : [{ name: "Nugget", quantity: 10, id: 100 }];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("items", JSON.stringify(items));
+  }, [items]);
 
   const itemName = inputValue.toLowerCase();
   const isFoundItem = items.find(
