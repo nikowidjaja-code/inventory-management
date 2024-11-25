@@ -5,6 +5,7 @@
   justify-content: center;
 
   padding: 1rem;
+  gap: 2rem;
 
   .top {
     display: flex;
@@ -46,7 +47,8 @@
 
       .btn {
         &.disabled {
-          filter: grayscale(100%);
+          background-color: black;
+          color:white;
           cursor: not-allowed;
           pointer-events: none;
         }
