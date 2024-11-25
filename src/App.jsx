@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import "./App.scss";
-import resetIcon from "./assets/close.png";
+import "./assets/scss/App.scss";
+import resetIcon from "./assets/images/close.png";
 
 function App() {
   const [inputValue, setInputValue] = useState("");
@@ -85,10 +85,10 @@ function App() {
           />
         </div>
         <div className="button-section">
-          <button className="btn" onClick={() => changeQuantity(inputValue, "plus")}>
+          <button className="btn btn-plus" onClick={() => changeQuantity(inputValue, "plus")}>
             Add
           </button>
-          <button className={`btn ${isFoundItem?'':'disabled'}`} onClick={() => changeQuantity(inputValue, "minus")}>
+          <button className={`btn btn-minus ${isFoundItem?'':'disabled'}`} onClick={() => changeQuantity(inputValue, "minus")}>
             Delete
           </button>
         </div>
