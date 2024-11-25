@@ -87,7 +87,7 @@ function App() {
         </div>
       </div>
       <div className="content">
-        {items.map((item, index) => (
+        {items.filter((item)=> item.name.toLowerCase().includes(inputValue.toLowerCase())).map((item, index) => (
           <div className="row" onClick={()=>handleClickRow(item.id)} key={index}>
             <p>{item.name}: </p>
             <p>{item.quantity}</p>
