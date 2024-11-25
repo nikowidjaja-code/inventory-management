@@ -79,17 +79,17 @@ function App() {
         </div>
         <div className="button-section">
           <button className="btn" onClick={() => changeQuantity(inputValue, "plus")}>
-            PLUS
+            Add
           </button>
           <button className={`btn ${isFoundItem?'':'disabled'}`} onClick={() => changeQuantity(inputValue, "minus")}>
-            MINUS
+            Delete
           </button>
         </div>
       </div>
       <div className="content">
         {items.filter((item)=> item.name.toLowerCase().includes(inputValue.toLowerCase())).map((item, index) => (
           <div className="row" onClick={()=>handleClickRow(item.id)} key={index}>
-            <p>{item.name}: </p>
+            <p>{item.name}</p>
             <p>{item.quantity}</p>
           </div>
         ))}
