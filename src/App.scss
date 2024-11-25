@@ -1,8 +1,6 @@
 .App {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
   height: 100vh;
   padding: 20% 15% 5% 15%;
   gap: 2rem;
@@ -14,9 +12,9 @@
     justify-content: center;
     gap: 0.5rem;
     width: 100%;
+
     .input-wrapper {
       position: relative;
-
       display: flex;
       align-items: center;
       justify-content: center;
@@ -34,7 +32,6 @@
         top: 50%;
         transform: translateY(-50%);
         cursor: pointer;
-
         height: 30%;
       }
     }
@@ -49,6 +46,7 @@
       .btn {
         height: 100%;
         width: 40%;
+
         &.disabled {
           background-color: rgb(105, 105, 105);
           color: rgb(18, 18, 18);
@@ -58,6 +56,7 @@
       }
     }
   }
+
   .content {
     display: flex;
     flex-direction: column;
@@ -65,7 +64,6 @@
     height: 75%;
     overflow-y: auto;
     scrollbar-gutter: stable;
-
     gap: 0.5rem;
 
     .row {
@@ -87,6 +85,31 @@
           text-align: right;
           border-left: 1px solid rgb(0, 0, 0);
         }
+      }
+    }
+  }
+
+  @media screen and (orientation: landscape) {
+    padding: 8% 10% 5% 10%;
+
+    .top {
+      flex-direction: row;
+
+      .input-wrapper {
+        width: 65%;
+      }
+
+      .button-section {
+        width: 35%;
+
+        .btn {
+          width: 45%;
+        }
+      }
+    }
+    .content{
+      .row{
+        min-height: 2.5rem;
       }
     }
   }
