@@ -13,10 +13,15 @@ function App() {
   });
 
   useEffect(() => {
-    // Scroll to hide the address bar
-    setTimeout(() => {
+    const hideAddressBar = () => {
       window.scrollTo(0, 1);
-    }, 0);
+    };
+
+    window.addEventListener('load', hideAddressBar);
+
+    return () => {
+      window.removeEventListener('load', hideAddressBar);
+    };
   }, []);
 
   useEffect(() => {
