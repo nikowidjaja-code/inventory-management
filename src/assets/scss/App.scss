@@ -34,6 +34,12 @@
 
         color: rgba(82, 74, 62, 0.82);
         font-family: "LucidaGrande";
+
+        &::placeholder {
+          color: rgba(218, 218, 218, 0.82);
+          font-size: 0.8rem;
+          transform: translateY(-0.1rem);
+        }
       }
 
       .reset-icon {
@@ -144,6 +150,9 @@
       .input-wrapper {
         input {
           font-size: 1.1rem;
+          &::placeholder {
+            font-size: 1rem;
+          }
         }
         .reset-icon {
           width: 2rem;

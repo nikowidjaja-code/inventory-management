@@ -14,7 +14,7 @@ function App() {
 
   const handleFullscreen = () => {
     // document.documentElement.requestFullscreen({ navigationUI: "hide" });
-    window.scrollTo(0, 1);
+    window.scrollTo(0, 1000);
   };
 
   useEffect(() => {
@@ -85,6 +85,7 @@ function App() {
       <div className="top">
         <div className="input-wrapper">
           <input
+            placeholder="type or tap your item to select"
             onClick={() => handleFullscreen()}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={(e) => {
