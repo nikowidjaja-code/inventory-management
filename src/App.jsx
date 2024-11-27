@@ -13,7 +13,8 @@ function App() {
   });
 
   const handleFullscreen = () => {
-    document.documentElement.requestFullscreen({ navigationUI: "hide" });
+    // document.documentElement.requestFullscreen({ navigationUI: "hide" });
+    window.scrollTo(0, 1);
   };
 
   useEffect(() => {
