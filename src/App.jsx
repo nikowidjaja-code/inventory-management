@@ -7,8 +7,17 @@ function App() {
   const [incrementingIndex, setIncrementingIndex] = useState(0);
   const [items, setItems] = useState(() => {
     const savedItems = localStorage.getItem("items");
-    return savedItems ? JSON.parse(savedItems) : [{ name: "Nugget", quantity: 10, id: 100 }];
+    return savedItems
+      ? JSON.parse(savedItems)
+      : [{ name: "Nugget", quantity: 10, id: 100 }];
   });
+
+  useEffect(() => {
+    // Scroll to hide the address bar
+    setTimeout(() => {
+      window.scrollTo(0, 1);
+    }, 0);
+  }, []);
 
   useEffect(() => {
     localStorage.setItem("items", JSON.stringify(items));
@@ -36,13 +45,15 @@ function App() {
         );
       }
       if (type === "minus" && isFoundItem.quantity > 0) {
-        if(isFoundItem.quantity === 1){
-          setItems(items.filter((item) => item.name.toLowerCase() !== itemName));
+        if (isFoundItem.quantity === 1) {
+          setItems(
+            items.filter((item) => item.name.toLowerCase() !== itemName)
+          );
           setInputValue("");
-        }else{
+        } else {
           setItems(
             items.map((item) =>
-            item.name.toLowerCase() === itemName
+              item.name.toLowerCase() === itemName
                 ? { ...item, quantity: item.quantity - 1 }
                 : item
             )
@@ -51,7 +62,10 @@ function App() {
       }
     } else {
       if (type === "plus") {
-        setItems([...items, { name: name, quantity: 1, id: incrementingIndex }]);
+        setItems([
+          ...items,
+          { name: name, quantity: 1, id: incrementingIndex },
+        ]);
         setIncrementingIndex(incrementingIndex + 1);
         setInputValue("");
       }
@@ -60,13 +74,13 @@ function App() {
 
   const handleResetInput = () => {
     setInputValue("");
-    document.querySelector('.input-wrapper input').focus();
+    document.querySelector(".input-wrapper input").focus();
   };
 
   const handleClickRow = (id) => {
     const foundItem = items.find((item) => item.id === id);
     setInputValue(foundItem.name);
-  }
+  };
 
   return (
     <div className="App">
@@ -75,7 +89,7 @@ function App() {
           <input
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={(e) => {
-              if (e.key === 'Enter') {
+              if (e.key === "Enter") {
                 changeQuantity(inputValue, "plus");
               }
             }}
@@ -91,21 +105,37 @@ function App() {
           />
         </div>
         <div className="button-section">
-          <button className="btn btn-plus" onClick={() => changeQuantity(inputValue, "plus")}>
+          <button
+            className="btn btn-plus"
+            onClick={() => changeQuantity(inputValue, "plus")}
+          >
             Add
           </button>
-          <button className={`btn btn-minus ${isFoundItem?'':'disabled'}`} onClick={() => changeQuantity(inputValue, "minus")}>
+          <button
+            className={`btn btn-minus ${isFoundItem ? "" : "disabled"}`}
+            onClick={() => changeQuantity(inputValue, "minus")}
+          >
             Delete
           </button>
         </div>
       </div>
       <div className="content">
-        {items.filter((item)=> item.name.toLowerCase().includes(inputValue.toLowerCase())).map((item, index) => (
-          <div className={`row ${item.name.toLowerCase()===itemName?'active':''}`} onClick={()=>handleClickRow(item.id)} key={index}>
-            <p>{item.name}</p>
-            <p>{item.quantity}</p>
-          </div>
-        ))}
+        {items
+          .filter((item) =>
+            item.name.toLowerCase().includes(inputValue.toLowerCase())
+          )
+          .map((item, index) => (
+            <div
+              className={`row ${
+                item.name.toLowerCase() === itemName ? "active" : ""
+              }`}
+              onClick={() => handleClickRow(item.id)}
+              key={index}
+            >
+              <p>{item.name}</p>
+              <p>{item.quantity}</p>
+            </div>
+          ))}
       </div>
     </div>
   );
