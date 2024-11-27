@@ -12,17 +12,9 @@ function App() {
       : [{ name: "Nugget", quantity: 10, id: 100 }];
   });
 
-  useEffect(() => {
-    const hideAddressBar = () => {
-      document.documentElement.requestFullscreen({ navigationUI: 'hide' });
-    };
-
-    window.addEventListener('load', hideAddressBar);
-
-    return () => {
-      window.removeEventListener('load', hideAddressBar);
-    };
-  }, []);
+  const handleFullscreen = () => {
+    document.documentElement.requestFullscreen({ navigationUI: "hide" });
+  };
 
   useEffect(() => {
     localStorage.setItem("items", JSON.stringify(items));
@@ -92,6 +84,7 @@ function App() {
       <div className="top">
         <div className="input-wrapper">
           <input
+            onClick={() => handleFullscreen()}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
