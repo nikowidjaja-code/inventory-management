@@ -14,7 +14,7 @@ function App() {
 
   useEffect(() => {
     const hideAddressBar = () => {
-      window.scrollTo(0, 1);
+      document.documentElement.requestFullscreen({ navigationUI: 'hide' });
     };
 
     window.addEventListener('load', hideAddressBar);
