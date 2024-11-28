@@ -70,6 +70,11 @@ function App() {
     document.querySelector(".input-wrapper input").focus();
   };
 
+  const handleResetItems = () => {
+    setItems([]);
+    setInputValue("");
+  };
+
   const handleClickRow = (id) => {
     const foundItem = items.find((item) => item.id === id);
     setInputValue(foundItem.name);
@@ -130,6 +135,11 @@ function App() {
               <p>{item.quantity}</p>
             </div>
           ))}
+      </div>
+      <div className="floating-section">
+        <div onClick={() => handleResetItems()} className="floating-section-item">
+          <p>Reset</p>
+        </div>
       </div>
     </div>
   );

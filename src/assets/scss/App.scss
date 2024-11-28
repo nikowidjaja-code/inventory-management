@@ -133,6 +133,24 @@
     }
   }
 
+  .floating-section {
+    position: fixed;
+    bottom: 50%;
+    left:0;
+    transform: translateY(-50%);
+    
+    display: flex;
+    padding: 0.5rem 0.1rem;
+    align-items: center;
+    justify-content: center;
+    background-color: #971b12;
+    
+    text-align: center;
+    color: #FFF8F0;
+    writing-mode: vertical-rl;
+    font-size: 0.8rem;
+  }
+
   @media screen and (orientation: landscape) {
     padding: 8% 22% 5% 22%;
 
