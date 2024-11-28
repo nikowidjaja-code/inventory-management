@@ -12,11 +12,6 @@ function App() {
       : [{ name: "Nugget", quantity: 10, id: 100 }];
   });
 
-  const handleFullscreen = () => {
-    // document.documentElement.requestFullscreen({ navigationUI: "hide" });
-    window.scrollTo(0, 1000);
-  };
-
   useEffect(() => {
     localStorage.setItem("items", JSON.stringify(items));
   }, [items]);
@@ -86,7 +81,6 @@ function App() {
         <div className="input-wrapper">
           <input
             placeholder="type or tap your item to select"
-            onClick={() => handleFullscreen()}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
