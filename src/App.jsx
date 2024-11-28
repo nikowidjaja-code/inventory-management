@@ -103,13 +103,13 @@ function App() {
             className="btn btn-plus"
             onClick={() => changeQuantity(inputValue, "plus")}
           >
-            Add
+            {isFoundItem ? "Add" : "Create"}
           </button>
           <button
             className={`btn btn-minus ${isFoundItem ? "" : "disabled"}`}
             onClick={() => changeQuantity(inputValue, "minus")}
           >
-            Delete
+            {isFoundItem && isFoundItem.quantity <= 1 ? "Delete" : "Subtract"}
           </button>
         </div>
       </div>
