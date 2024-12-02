@@ -38,10 +38,10 @@ function App() {
     setItems(items.filter((item) => item.name.toLowerCase() !== itemName));
   };
 
-  const addItem = () => {
+  const addItem = (name) => {
     setItems([
       ...items,
-      { name: itemName, quantity: 1, id: incrementingIndex },
+      { name: name, quantity: 1, id: incrementingIndex },
     ]);
   };
 
@@ -65,7 +65,7 @@ function App() {
       }
     } else {
       if (type === "plus") {
-        addItem();
+        addItem(name);
         setIncrementingIndex(incrementingIndex + 1);
         setInputValue("");
       }
@@ -96,7 +96,7 @@ function App() {
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
-                changeQuantity(inputValue, "plus");
+                handleButtonInteraction(inputValue, "plus")
               }
             }}
             maxLength={20}
