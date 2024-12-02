@@ -21,7 +21,31 @@ function App() {
     (item) => item.name.toLowerCase() === itemName
   );
 
-  const changeQuantity = (name, type) => {
+  const changeQuantity = (type) => {
+    setItems(
+      items.map((item) =>
+        item.name.toLowerCase() === itemName
+          ? {
+              ...item,
+              quantity: type === "plus" ? item.quantity + 1 : item.quantity - 1,
+            }
+          : item
+      )
+    );
+  };
+
+  const removeItem = () => {
+    setItems(items.filter((item) => item.name.toLowerCase() !== itemName));
+  };
+
+  const addItem = () => {
+    setItems([
+      ...items,
+      { name: itemName, quantity: 1, id: incrementingIndex },
+    ]);
+  };
+
+  const handleButtonInteraction = (name, type) => {
     if (name.length === 0) {
       alert("Please enter an item");
       return;
@@ -29,36 +53,19 @@ function App() {
 
     if (isFoundItem) {
       if (type === "plus") {
-        setItems(
-          items.map((item) =>
-            item.name.toLowerCase() === itemName
-              ? { ...item, quantity: item.quantity + 1 }
-              : item
-          )
-        );
+          changeQuantity("plus");
       }
       if (type === "minus" && isFoundItem.quantity > 0) {
         if (isFoundItem.quantity === 1) {
-          setItems(
-            items.filter((item) => item.name.toLowerCase() !== itemName)
-          );
+          removeItem();
           setInputValue("");
         } else {
-          setItems(
-            items.map((item) =>
-              item.name.toLowerCase() === itemName
-                ? { ...item, quantity: item.quantity - 1 }
-                : item
-            )
-          );
+          changeQuantity("minus");
         }
       }
     } else {
       if (type === "plus") {
-        setItems([
-          ...items,
-          { name: name, quantity: 1, id: incrementingIndex },
-        ]);
+        addItem();
         setIncrementingIndex(incrementingIndex + 1);
         setInputValue("");
       }
@@ -106,13 +113,13 @@ function App() {
         <div className="button-section">
           <button
             className="btn btn-plus"
-            onClick={() => changeQuantity(inputValue, "plus")}
+            onClick={() => handleButtonInteraction(inputValue, "plus")}
           >
             {isFoundItem ? "Add" : "Create"}
           </button>
           <button
             className={`btn btn-minus ${isFoundItem ? "" : "disabled"}`}
-            onClick={() => changeQuantity(inputValue, "minus")}
+            onClick={() => handleButtonInteraction(inputValue, "minus")}
           >
             {isFoundItem && isFoundItem.quantity <= 1 ? "Delete" : "Subtract"}
           </button>
@@ -137,7 +144,10 @@ function App() {
           ))}
       </div>
       <div className="floating-section">
-        <div onClick={() => handleResetItems()} className="floating-section-item">
+        <div
+          onClick={() => handleResetItems()}
+          className="floating-section-item"
+        >
           <p>Reset</p>
         </div>
       </div>
